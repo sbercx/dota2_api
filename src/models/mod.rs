@@ -153,3 +153,42 @@ pub struct MatchDetailsResult
 {
     pub result: MatchDetails,
 }
+
+#[derive(Deserialize, Debug)]
+pub struct TopLiveGameList
+{
+    pub game_list: Vec<TopLiveGame>,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct TopLiveGame
+{
+    pub activate_time: i32,
+    pub deactivate_time: i32,
+    pub server_steam_id: String,
+    pub lobby_id: String,
+    pub league_id: i32,
+    pub lobby_type: i32,
+    pub game_time: i32,
+    pub delay: i32,
+    pub spectators: i32,
+    pub game_mode: i32,
+    pub average_mmr: i32,
+    pub team_name_radiant: Option<String>,
+    pub team_name_dire: Option<String>,
+    pub team_logo_radiant: Option<String>,
+    pub team_logo_dire: Option<String>,
+    pub sort_score: i32,
+    pub last_update_time: i64,
+    pub radiant_lead: i32,
+    pub radiant_score: i32,
+    pub dire_score: i32,
+    pub players: Option<Vec<TopLiveGamePlayer>>,
+    pub building_state: i32,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct TopLiveGamePlayer {
+    pub account_id: i32,
+    pub hero_id: i32,
+}

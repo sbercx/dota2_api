@@ -84,6 +84,15 @@ impl<'a> Dota2Api<'a> {
         Ok(data)
     }
 
+    pub fn get_top_live_games(&mut self) -> Result<Vec<TopLiveGame>, Error> {
+        let mut url = String::from("http://api.steampowered.com/IDOTA2Match_570/GetTopLiveGame/V001/?partner=&");
+        Dota2Api::add_param(&mut url, "key", self.key);
+        let response = self.get(url.as_str())?;
+        let data_result: TopLiveGameList = serde_json::from_str(response.as_str())?;
+        let data: Vec<TopLiveGame> = data_result.game_list;
+        Ok(data)
+    }
+
     fn get(&mut self, url: &str) -> Result<String, Error> {
             let mut response = self.http_client.get(url).send()?;
             let mut tmp = String::new();
