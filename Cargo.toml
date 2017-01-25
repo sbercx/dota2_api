@@ -1,6 +1,6 @@
 [package]
 name = "dota2_api"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["Sam Bercx"]
 repository = "https://github.com/sbxx/dota2_api"
 documentation = "https://docs.rs/dota2_api/"
