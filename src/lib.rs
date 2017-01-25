@@ -88,7 +88,7 @@ impl<'a> Dota2Api<'a> {
             let mut response = self.http_client.get(url).send()?;
             let mut tmp = String::new();
             if response.status == StatusCode::Forbidden {
-                return Err(Error::Forbidden("Access is denied. Retrying will not help. Please verify your 'key' parameter."));
+                return Err(Error::Forbidden("Access is denied. Retrying will not help. Please check your API key."));
             }
             let _ = response.read_to_string(&mut tmp);
             Ok(tmp)
