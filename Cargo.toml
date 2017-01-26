@@ -11,6 +11,6 @@ keywords = ["dota2", "api"]
 
 [dependencies]
 hyper = "0.10.2"
-serde = "0.9.0-rc1"
-serde_json = "0.9.0-rc1"
-serde_derive = "0.9.0-rc1"
+serde = "0.9.1"
+serde_json = "0.9.1"
+serde_derive = "0.9.1"
