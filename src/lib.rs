@@ -16,7 +16,7 @@ pub enum Error {
     Http(hyper::Error),
     Json(serde_json::Error),
     Forbidden(&'static str),
-    Message(String)
+    Message(String),
 }
 
 impl From<hyper::Error> for Error {
@@ -34,14 +34,14 @@ impl From<serde_json::Error> for Error {
 #[derive(Debug)]
 pub struct Dota2Api<'a> {
     http_client: Client,
-    pub key: &'a str
+    pub key: &'a str,
 }
 
 impl<'a> Dota2Api<'a> {
     pub fn new(key: &'a str) -> Dota2Api<'a> {
         Dota2Api {
             http_client: Client::new(),
-            key: key
+            key: key,
         }
     }
 
@@ -74,11 +74,13 @@ impl<'a> Dota2Api<'a> {
         let data_result: MatchDetailsResult = match serde_json::from_str(response.as_str()) {
             Err(e) => {
                 match serde_json::from_str::<ApiErrorResult>(response.as_str()) {
-                    Err(_) => return Err(Error::Json(e)), // return original error because we could't parse an error message from the json
-                    Ok(er) => return Err(Error::Message(er.result.error)) // return the parsed error message
+                    // return original error because we could't parse an error message from the json
+                    Err(_) => return Err(Error::Json(e)),
+                    // return the parsed error message
+                    Ok(er) => return Err(Error::Message(er.result.error)),
                 };
-            },
-            Ok(r) => r
+            }
+            Ok(r) => r,
         };
         let data = data_result.result;
         Ok(data)
@@ -94,13 +96,13 @@ impl<'a> Dota2Api<'a> {
     }
 
     fn get(&mut self, url: &str) -> Result<String, Error> {
-            let mut response = self.http_client.get(url).send()?;
-            let mut tmp = String::new();
-            if response.status == StatusCode::Forbidden {
-                return Err(Error::Forbidden("Access is denied. Retrying will not help. Please check your API key."));
-            }
-            let _ = response.read_to_string(&mut tmp);
-            Ok(tmp)
+        let mut response = self.http_client.get(url).send()?;
+        let mut tmp = String::new();
+        if response.status == StatusCode::Forbidden {
+            return Err(Error::Forbidden("Access is denied. Retrying will not help. Please check your API key."));
+        }
+        let _ = response.read_to_string(&mut tmp);
+        Ok(tmp)
     }
 
     fn add_param<T: Display>(url: &mut String, param_name: &str, param_value: T) {

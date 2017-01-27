@@ -3,7 +3,7 @@
 pub enum SkillLevel {
     Normal,
     High,
-    VeryHigh
+    VeryHigh,
 }
 
 impl From<SkillLevel> for i32 {
@@ -17,8 +17,7 @@ impl From<SkillLevel> for i32 {
 }
 
 #[derive(Default, Debug)]
-pub struct MatchHistoryOptions
-{
+pub struct MatchHistoryOptions {
     pub hero_id: Option<i32>,
     pub skill: Option<SkillLevel>, // None is any skill level
     pub date_min: Option<u64>, // date in UTC seconds since Jan 1, 1970 (unix time format)
@@ -26,48 +25,43 @@ pub struct MatchHistoryOptions
     pub account_id: Option<u32>,
     pub league_id: Option<u32>,
     pub start_at_match_id: Option<u64>,
-    pub matches_requested: Option<i32> // max is 25
+    pub matches_requested: Option<i32>, // max is 25
 }
 
 #[derive(Deserialize, Debug)]
-pub struct MatchHistoryPlayer
-{
+pub struct MatchHistoryPlayer {
     pub account_id: Option<i64>, // account_id is None if player was a bot
     pub player_slot: i32,
     pub hero_id: i32,
 }
 
 #[derive(Deserialize, Debug)]
-pub struct Match
-{
+pub struct Match {
     pub match_id: i64,
     pub match_seq_num: i64,
     pub start_time: i64,
     pub lobby_type: i32,
     pub radiant_team_id: i32,
     pub dire_team_id: i32,
-    pub players: Vec<MatchHistoryPlayer>
+    pub players: Vec<MatchHistoryPlayer>,
 }
 
 #[derive(Deserialize, Debug)]
-pub struct MatchHistory
-{
+pub struct MatchHistory {
     pub status: i32,
     pub num_results: i32,
     pub total_results: i32,
     pub results_remaining: i32,
-    pub matches: Vec<Match>
+    pub matches: Vec<Match>,
 }
 
 #[derive(Deserialize, Debug)]
-pub struct MatchHistoryResult
-{
-    pub result: MatchHistory
+pub struct MatchHistoryResult {
+    pub result: MatchHistory,
 }
 
 #[derive(Deserialize, Debug)]
-pub struct MatchDetails
-{
+pub struct MatchDetails {
     pub players: Vec<MatchDetailsPlayer>,
     pub radiant_win: bool,
     pub duration: i64,
@@ -75,47 +69,43 @@ pub struct MatchDetails
     pub start_time: u64,
     pub match_id: u64,
     pub match_seq_num: u64,
-    pub tower_status_radiant : i32,
-    pub tower_status_dire : i32,
-    pub barracks_status_radiant : i32,
-    pub barracks_status_dire : i32,
-    pub cluster : i32,
-    pub first_blood_time : i32,
-    pub lobby_type : i32,
-    pub human_players : i32,
-    pub leagueid : i64,
-    pub positive_votes : i32,
-    pub negative_votes : i32,
-    pub game_mode : i32,
-    pub flags : i32,
-    pub engine : i32,
-    pub radiant_score : i32,
-    pub dire_score : i32,
+    pub tower_status_radiant: i32,
+    pub tower_status_dire: i32,
+    pub barracks_status_radiant: i32,
+    pub barracks_status_dire: i32,
+    pub cluster: i32,
+    pub first_blood_time: i32,
+    pub lobby_type: i32,
+    pub human_players: i32,
+    pub leagueid: i64,
+    pub positive_votes: i32,
+    pub negative_votes: i32,
+    pub game_mode: i32,
+    pub flags: i32,
+    pub engine: i32,
+    pub radiant_score: i32,
+    pub dire_score: i32,
 }
 
 #[derive(Deserialize, Debug)]
-pub struct AbilityUpgrade
-{
+pub struct AbilityUpgrade {
     pub ability: i32,
     pub time: i32,
     pub level: i32,
 }
 
 #[derive(Deserialize, Debug)]
-pub struct ApiErrorResult
-{
-    pub result: ApiError
+pub struct ApiErrorResult {
+    pub result: ApiError,
 }
 
 #[derive(Deserialize, Debug)]
-pub struct ApiError
-{
-    pub error: String
+pub struct ApiError {
+    pub error: String,
 }
 
 #[derive(Deserialize, Debug)]
-pub struct MatchDetailsPlayer
-{
+pub struct MatchDetailsPlayer {
     pub account_id: u64,
     pub player_slot: i32,
     pub hero_id: i32,
@@ -149,20 +139,17 @@ pub struct MatchDetailsPlayer
 }
 
 #[derive(Deserialize, Debug)]
-pub struct MatchDetailsResult
-{
+pub struct MatchDetailsResult {
     pub result: MatchDetails,
 }
 
 #[derive(Deserialize, Debug)]
-pub struct TopLiveGameList
-{
+pub struct TopLiveGameList {
     pub game_list: Vec<TopLiveGame>,
 }
 
 #[derive(Deserialize, Debug)]
-pub struct TopLiveGame
-{
+pub struct TopLiveGame {
     pub activate_time: i32,
     pub deactivate_time: i32,
     pub server_steam_id: String,
