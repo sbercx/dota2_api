@@ -1,6 +1,6 @@
 [package]
 name = "dota2_api"
-version = "0.2.2"
+version = "0.2.3"
 authors = ["Sam Bercx"]
 repository = "https://github.com/sbxx/dota2_api"
 documentation = "https://docs.rs/dota2_api/"
@@ -10,7 +10,7 @@ description = "Rust client for the official Dota 2 web API"
 keywords = ["dota2", "api"]
 
 [dependencies]
-hyper = "0.10.2"
-serde = "0.9.1"
-serde_json = "0.9.1"
-serde_derive = "0.9.1"
+hyper = "0.10"
+serde = "0.9"
+serde_json = "0.9"
+serde_derive = "0.9"
