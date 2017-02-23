@@ -1,7 +1,6 @@
 # dota2_api
 Rust client for the official Dota 2 web API
 
-Nightly is currently *required*!
 
 ## Currently available requests
 * get_match_details
@@ -21,12 +20,15 @@ use dota2_api::models::{SkillLevel, MatchHistoryOptions};
 
 fn main() {
     let mut dota = Dota2Api::new("your key here");
+
     let options = MatchHistoryOptions {
         matches_requested: Some(10),
         skill: Some(SkillLevel::VeryHigh),
         ..Default::default()
     };
+
     let data = dota.get_match_history(Some(&options)).expect("Couldn't get match history");
+    
     for m in data.matches {
         println!("Match ID: {}, Number of players: {}", m.match_id, m.players.len());
     }

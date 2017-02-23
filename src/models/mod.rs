@@ -18,19 +18,23 @@ impl From<SkillLevel> for i32 {
 
 #[derive(Default, Debug)]
 pub struct MatchHistoryOptions {
-    pub hero_id: Option<i32>,
-    pub skill: Option<SkillLevel>, // None is any skill level
-    pub date_min: Option<u64>, // date in UTC seconds since Jan 1, 1970 (unix time format)
+    pub hero_id: Option<i32>, 
+    pub skill: Option<SkillLevel>,
+    /// Minimum date in UNIX time.
+    pub date_min: Option<u64>,
+    /// Maximum date in UNIX time.
     pub date_max: Option<u64>,
     pub account_id: Option<u32>,
     pub league_id: Option<u32>,
     pub start_at_match_id: Option<u64>,
-    pub matches_requested: Option<i32>, // max is 25
+    /// Number of matches to be requested. The maximum is 25.
+    pub matches_requested: Option<i32>,
 }
 
 #[derive(Deserialize, Debug)]
 pub struct MatchHistoryPlayer {
-    pub account_id: Option<i64>, // account_id is None if player was a bot
+    /// This is ```None``` if the player is a bot.
+    pub account_id: Option<i64>,
     pub player_slot: i32,
     pub hero_id: i32,
 }
@@ -99,6 +103,7 @@ pub struct ApiErrorResult {
     pub result: ApiError,
 }
 
+/// Error returned by the Dota 2 web API
 #[derive(Deserialize, Debug)]
 pub struct ApiError {
     pub error: String,
